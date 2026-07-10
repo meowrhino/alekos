@@ -1,0 +1,303 @@
+/* =====================================================
+   akkrazzo di cane — estilos
+   Fondo negro + assets dibujados a mano con
+   mix-blend-mode: difference para que se vean en blanco.
+   ===================================================== */
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  font-family: 'Darumadrop One', 'Comic Sans MS', cursive;
+  min-height: 100dvh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Todo lo dibujado/escaneado se muestra en negativo */
+.blend {
+  mix-blend-mode: difference;
+}
+
+/* ---------- cosmos: welcome y portadas de sección ---------- */
+
+.cosmos {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+}
+
+.cosmos .title {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 60dvw;
+  height: 40dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.cosmos .title img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.title-text {
+  font-size: clamp(2.5rem, 9vmin, 7rem);
+  text-align: center;
+  line-height: 1;
+}
+
+/* estrellas del menú */
+.star {
+  position: absolute;
+  /* left/top marcan el centro de la estrella; translate no interfiere
+     con el transform que anima la órbita/deriva */
+  translate: -50% -50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+}
+
+.star img {
+  width: 9vmin;
+  min-width: 44px;
+  transition: scale 0.25s ease;
+}
+
+.star:hover img {
+  scale: 1.2;
+}
+
+.star .label {
+  font-size: clamp(0.95rem, 2.4vmin, 1.4rem);
+  white-space: nowrap;
+}
+
+/* estrellas decorativas: no se pueden clicar */
+.star.decor {
+  pointer-events: none;
+}
+
+.star.decor img {
+  width: 4vmin;
+  min-width: 18px;
+}
+
+/* ---------- tooltip (sinopsis al hacer hover) ---------- */
+
+#tooltip {
+  position: fixed;
+  z-index: 10;
+  max-width: 36ch;
+  background: #000;
+  border: 1.5px solid #fff;
+  /* borde irregular, como trazado a mano */
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  padding: 0.5rem 0.9rem;
+  font-size: 1.05rem;
+  line-height: 1.3;
+  pointer-events: none;
+}
+
+/* ---------- botón de volver (siempre abajo a la izquierda) ---------- */
+
+.back {
+  position: fixed;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 5;
+}
+
+.back img {
+  width: 8vmin;
+  min-width: 52px;
+  transition: scale 0.25s ease;
+}
+
+.back:hover img {
+  scale: 1.15;
+}
+
+/* ---------- páginas de proyecto / capítulo ---------- */
+
+.page {
+  min-height: 100dvh;
+  padding: 3.5rem 1.5rem 8rem;
+}
+
+.project {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+.project-title {
+  font-size: clamp(2rem, 6vmin, 4rem);
+  text-align: center;
+  line-height: 1.1;
+  margin: 0;
+  font-weight: normal;
+}
+
+.project-subtitle {
+  font-size: clamp(1.3rem, 3.5vmin, 2rem);
+  text-align: center;
+  margin: -1.5rem 0 0;
+  font-weight: normal;
+}
+
+.cover img {
+  max-height: 70dvh;
+  display: block;
+}
+
+.text-block {
+  max-width: 65ch;
+  font-size: 1.25rem;
+  line-height: 1.55;
+}
+
+.text-block p {
+  margin: 0 0 1.2em;
+}
+
+/* ---------- galerías ---------- */
+
+.gallery {
+  width: 100%;
+}
+
+/* horizontal: se lee de izquierda a derecha, como un cómic */
+.gallery-h {
+  display: flex;
+  gap: 2rem;
+  overflow-x: auto;
+  padding-bottom: 1.2rem;
+  scroll-behavior: smooth;
+}
+
+.gallery-h img {
+  height: 65dvh;
+  max-height: 640px;
+  width: auto;
+  max-width: none;
+  flex: none;
+}
+
+.gallery-h::-webkit-scrollbar {
+  height: 6px;
+}
+
+.gallery-h::-webkit-scrollbar-thumb {
+  background: #fff;
+  border-radius: 3px;
+}
+
+/* vertical: columna centrada */
+.gallery-v {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.gallery-v img {
+  max-width: min(100%, 800px);
+}
+
+/* ---------- capítulos ---------- */
+
+.chapters {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+  font-size: clamp(1.4rem, 4vmin, 2rem);
+  text-align: center;
+}
+
+.chapters a:hover {
+  text-decoration: underline wavy;
+  text-underline-offset: 6px;
+}
+
+/* ---------- vídeo y audio ---------- */
+
+.videos {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  align-items: center;
+}
+
+.videos video,
+.videos iframe {
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border: 0;
+}
+
+.tracks {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 700px;
+}
+
+.track .track-name {
+  font-size: 1.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.track audio {
+  width: 100%;
+}
+
+/* ---------- móvil ---------- */
+
+@media (max-width: 600px) {
+  .cosmos .title {
+    width: 80dvw;
+  }
+
+  .gallery-h img {
+    height: 55dvh;
+  }
+
+  .page {
+    padding: 2.5rem 1rem 7rem;
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "_comentario": "Sección de cómics. Un proyecto simple lleva 'cover' + 'gallery'. Un proyecto largo puede llevar 'chapters': cada capítulo tiene su propia portada y galería. Las galerías de cómic suelen ser layout 'horizontal' (se leen de lado).",
+  "id": "comics",
+  "title": {
+    "name": "título de la sección dibujado a mano",
+    "src": "assets/ui/title-comics.svg",
+    "text": "comics"
+  },
+  "projects": [
+    {
+      "id": "perro-cosmico",
+      "name": "perro cósmico",
+      "synopsis": "Serie larga por capítulos: un perro callejero descubre que puede perseguir cometas.",
+      "icon": { "name": "icono del proyecto", "src": "assets/icons/star.svg" },
+      "cover": { "name": "portada de perro cósmico", "src": "assets/placeholders/cover.svg" },
+      "chapters": [
+        {
+          "id": "capitulo-1",
+          "name": "capítulo 1 · el cielo de abajo",
+          "synopsis": "El perro descubre que el charco de la plaza refleja otro cielo.",
+          "cover": { "name": "portada del capítulo 1", "src": "assets/placeholders/cover.svg" },
+          "gallery": {
+            "layout": "horizontal",
+            "images": [
+              { "name": "página 1", "src": "assets/placeholders/page1.svg" },
+              { "name": "página 2", "src": "assets/placeholders/page2.svg" },
+              { "name": "página 3", "src": "assets/placeholders/page3.svg" },
+              { "name": "página 4", "src": "assets/placeholders/page4.svg" }
+            ]
+          }
+        },
+        {
+          "id": "capitulo-2",
+          "name": "capítulo 2 · la cola del cometa",
+          "synopsis": "Primer salto: el perro se agarra a la cola de un cometa perdido.",
+          "cover": { "name": "portada del capítulo 2", "src": "assets/placeholders/cover.svg" },
+          "gallery": {
+            "layout": "horizontal",
+            "images": [
+              { "name": "página 1", "src": "assets/placeholders/page1.svg" },
+              { "name": "página 2", "src": "assets/placeholders/page2.svg" },
+              { "name": "página 3", "src": "assets/placeholders/page3.svg" }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "historias-cortas",
+      "name": "historias cortas",
+      "synopsis": "Piezas breves autoconclusivas, dibujadas del tirón.",
+      "icon": { "name": "icono del proyecto", "src": "assets/icons/moon.svg" },
+      "cover": { "name": "portada de historias cortas", "src": "assets/placeholders/cover.svg" },
+      "gallery": {
+        "layout": "horizontal",
+        "images": [
+          { "name": "página 1", "src": "assets/placeholders/page1.svg" },
+          { "name": "página 2", "src": "assets/placeholders/page2.svg" },
+          { "name": "página 3", "src": "assets/placeholders/page3.svg" },
+          { "name": "página 4", "src": "assets/placeholders/page4.svg" }
+        ]
+      }
+    }
+  ]
+}

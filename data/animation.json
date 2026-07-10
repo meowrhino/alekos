@@ -1,0 +1,31 @@
+{
+  "_comentario": "Sección de animación. Cada proyecto puede llevar 'videos' (uno o varios; src puede ser un mp4 propio o un enlace de embed de YouTube/Vimeo — si src está vacío se ignora), 'text' y 'gallery'. Para YouTube usar el formato https://www.youtube.com/embed/ID",
+  "id": "animation",
+  "title": {
+    "name": "título de la sección dibujado a mano",
+    "src": "assets/ui/title-animation.svg",
+    "text": "animation"
+  },
+  "projects": [
+    {
+      "id": "loops",
+      "name": "loops",
+      "synopsis": "Animaciones cortas que se muerden la cola: gifs, pruebas y bucles.",
+      "icon": { "name": "icono del proyecto", "src": "assets/icons/comet.svg" },
+      "videos": [
+        { "name": "loop 1", "src": "", "poster": "assets/placeholders/cover.svg" }
+      ],
+      "text": [
+        "Bucles cortos animados a mano, frame a frame.",
+        "Cuando llegue el primer vídeo, basta con poner su ruta (o el enlace de YouTube/Vimeo) en el campo src del JSON."
+      ],
+      "gallery": {
+        "layout": "horizontal",
+        "images": [
+          { "name": "fotograma 1", "src": "assets/placeholders/page1.svg" },
+          { "name": "fotograma 2", "src": "assets/placeholders/page3.svg" }
+        ]
+      }
+    }
+  ]
+}

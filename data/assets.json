@@ -1,0 +1,15 @@
+{
+  "_comentario": "Recursos compartidos de la interfaz. 'id' es la variable con la que el código los encuentra (no cambiarla), 'name' es solo descriptivo y 'src' es la ruta del archivo: para cambiar un dibujo basta con cambiar su src o sustituir el archivo.",
+  "resources": [
+    {
+      "id": "welcomeTitle",
+      "name": "Título principal dibujado a mano (akkrazzo di cane)",
+      "src": "assets/ui/title-welcome.svg"
+    },
+    {
+      "id": "backButton",
+      "name": "Botón de volver atrás (flecha dibujada a mano)",
+      "src": "assets/ui/back.svg"
+    }
+  ]
+}

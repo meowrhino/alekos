@@ -1,0 +1,30 @@
+{
+  "_comentario": "Sección de música. Cada proyecto (álbum, EP, single) lleva 'cover', 'tracks' (canciones: si src está vacío se muestra solo el nombre, sin reproductor; cuando haya mp3, poner su ruta, p. ej. assets/music/primer-ep/cancion-1.mp3) y opcionalmente 'gallery' y 'text'.",
+  "id": "music",
+  "title": {
+    "name": "título de la sección dibujado a mano",
+    "src": "assets/ui/title-music.svg",
+    "text": "music"
+  },
+  "projects": [
+    {
+      "id": "primer-ep",
+      "name": "primer ep",
+      "synopsis": "Cuatro canciones grabadas en casa, con más eco del previsto.",
+      "icon": { "name": "icono del proyecto", "src": "assets/icons/spiral.svg" },
+      "cover": { "name": "portada del ep", "src": "assets/placeholders/cover.svg" },
+      "tracks": [
+        { "name": "canción 1", "src": "" },
+        { "name": "canción 2", "src": "" },
+        { "name": "canción 3", "src": "" },
+        { "name": "canción 4", "src": "" }
+      ],
+      "gallery": {
+        "layout": "vertical",
+        "images": [
+          { "name": "foto de la grabación", "src": "assets/placeholders/page2.svg" }
+        ]
+      }
+    }
+  ]
+}

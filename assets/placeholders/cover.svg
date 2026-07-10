@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800">
+  <path d="M22 26 C 200 16, 410 22, 578 24 C 572 270, 576 540, 576 776 C 400 770, 190 774, 24 774 C 28 520, 18 260, 22 26 Z"
+        fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M170 380 C 260 320, 340 320, 430 380 M200 470 C 270 510, 330 510, 400 470"
+        fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  <text x="300" y="640" font-size="60" fill="#fff" text-anchor="middle"
+        font-family="'Comic Sans MS','Chalkboard SE',cursive">portada</text>
+</svg>

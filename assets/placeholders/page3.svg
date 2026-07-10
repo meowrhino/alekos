@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800">
+  <path d="M18 28 C 190 18, 410 24, 582 20 C 578 250, 572 550, 580 776 C 380 780, 180 772, 24 778 C 20 530, 26 250, 18 28 Z"
+        fill="none" stroke="#fff" stroke-width="6" stroke-linejoin="round"/>
+  <text x="300" y="440" font-size="160" fill="#fff" text-anchor="middle"
+        font-family="'Comic Sans MS','Chalkboard SE',cursive">3</text>
+</svg>
