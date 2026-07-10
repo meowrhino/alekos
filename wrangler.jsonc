@@ -1,0 +1,9 @@
+// Configuración de Cloudflare Workers (static assets).
+// La web es 100% estática: no hay Worker de código, solo servir archivos.
+{
+  "name": "alekos-web",
+  "compatibility_date": "2026-07-10",
+  "assets": {
+    "directory": "./"
+  }
+}

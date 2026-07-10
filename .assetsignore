@@ -1,0 +1,6 @@
+# archivos del repo que no deben servirse como parte de la web
+.claude/
+.gitignore
+.assetsignore
+wrangler.jsonc
+README.md
