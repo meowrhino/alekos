@@ -1,5 +1,5 @@
 {
-  "_comentario": "Sección de cómics. Un proyecto simple lleva 'cover' + 'gallery'. Un proyecto largo puede llevar 'chapters': su pantalla se convierte en otro cielo con la portada en el centro y los capítulos como estrellas, ordenados de izquierda a derecha en franjas (posición aleatoria dentro de cada franja). Cada capítulo tiene su propia portada y galería, y puede llevar 'icon' y 'motion' propios. Las galerías de cómic suelen ser layout 'horizontal' (se leen de lado).",
+  "_comentario": "Sección de cómics. Formas cortas: la galería puede ser una simple lista de rutas (en comics se lee en horizontal por defecto), la portada una ruta a secas, y si un proyecto no lleva 'name' se usa su id sin guiones. Todo admite también la forma larga ({name, src} / {layout, images}) para afinar. Un proyecto con 'chapters' se convierte en otro cielo: portada en el centro y capítulos como estrellas ordenadas de izquierda a derecha; cada capítulo puede llevar 'icon' y 'motion' propios.",
   "id": "comics",
   "title": {
     "name": "título de la sección (pendiente de escanear; con src vacío se usa la fuente)",
@@ -11,98 +11,43 @@
       "id": "perro-cosmico",
       "name": "perro cósmico",
       "synopsis": "Serie larga por capítulos: un perro callejero descubre que puede perseguir cometas.",
-      "cover": {
-        "name": "portada de perro cósmico",
-        "src": "assets/icons/new/trim_planeta1.png"
-      },
+      "cover": "assets/icons/new/trim_planeta1.png",
       "chapters": [
         {
           "id": "capitulo-1",
           "name": "capítulo 1 · el cielo de abajo",
           "synopsis": "El perro descubre que el charco de la plaza refleja otro cielo.",
-          "cover": {
-            "name": "portada del capítulo 1",
-            "src": "assets/icons/new/trim_planeta1.png"
-          },
-          "gallery": {
-            "layout": "horizontal",
-            "images": [
-              {
-                "name": "página 1",
-                "src": "assets/icons/new/trim_estrella1.png"
-              },
-              {
-                "name": "página 2",
-                "src": "assets/icons/new/trim_estrella2.png"
-              },
-              {
-                "name": "página 3",
-                "src": "assets/icons/new/trim_estrella3.png"
-              },
-              {
-                "name": "página 4",
-                "src": "assets/icons/new/trim_estrella4.png"
-              }
-            ]
-          }
+          "cover": "assets/icons/new/trim_planeta1.png",
+          "gallery": [
+            "assets/icons/new/trim_estrella1.png",
+            "assets/icons/new/trim_estrella2.png",
+            "assets/icons/new/trim_estrella3.png",
+            "assets/icons/new/trim_estrella4.png"
+          ]
         },
         {
           "id": "capitulo-2",
           "name": "capítulo 2 · la cola del cometa",
           "synopsis": "Primer salto: el perro se agarra a la cola de un cometa perdido.",
-          "cover": {
-            "name": "portada del capítulo 2",
-            "src": "assets/icons/new/trim_planeta1.png"
-          },
-          "gallery": {
-            "layout": "horizontal",
-            "images": [
-              {
-                "name": "página 1",
-                "src": "assets/icons/new/trim_estrella1.png"
-              },
-              {
-                "name": "página 2",
-                "src": "assets/icons/new/trim_estrella2.png"
-              },
-              {
-                "name": "página 3",
-                "src": "assets/icons/new/trim_estrella3.png"
-              }
-            ]
-          }
+          "cover": "assets/icons/new/trim_planeta1.png",
+          "gallery": [
+            "assets/icons/new/trim_estrella1.png",
+            "assets/icons/new/trim_estrella2.png",
+            "assets/icons/new/trim_estrella3.png"
+          ]
         }
       ]
     },
     {
       "id": "historias-cortas",
-      "name": "historias cortas",
       "synopsis": "Piezas breves autoconclusivas, dibujadas del tirón.",
-      "cover": {
-        "name": "portada de historias cortas",
-        "src": "assets/icons/new/trim_planeta1.png"
-      },
-      "gallery": {
-        "layout": "horizontal",
-        "images": [
-          {
-            "name": "página 1",
-            "src": "assets/icons/new/trim_estrella1.png"
-          },
-          {
-            "name": "página 2",
-            "src": "assets/icons/new/trim_estrella2.png"
-          },
-          {
-            "name": "página 3",
-            "src": "assets/icons/new/trim_estrella3.png"
-          },
-          {
-            "name": "página 4",
-            "src": "assets/icons/new/trim_estrella4.png"
-          }
-        ]
-      }
+      "cover": "assets/icons/new/trim_planeta1.png",
+      "gallery": [
+        "assets/icons/new/trim_estrella1.png",
+        "assets/icons/new/trim_estrella2.png",
+        "assets/icons/new/trim_estrella3.png",
+        "assets/icons/new/trim_estrella4.png"
+      ]
     }
   ]
 }

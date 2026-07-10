@@ -8,7 +8,7 @@ Portfolio de Alekos: cómic, ilustración, animación y música. Un cielo negro 
 
 ## Cómo funciona
 
-- **Fondo del cielo**: las estrellitas de `fondo.png` se trocearon en 28 sprites (`assets/icons/new/fondo/`) y el fondo se genera nuevo en cada visita. No es azar puro (el random puro deja grumos y huecos feos): las posiciones salen de un muestreo **Poisson-disc** (puntos al azar con distancia mínima entre sí, el "blue noise" clásico para repartir estrellas), los tamaños siguen una **ley de potencias** (muchas pequeñas, pocas grandes, como las magnitudes del cielo real) y una **banda de mayor densidad** cruza la pantalla con ángulo aleatorio, como una vía láctea. Brillos y rotaciones varían por estrella, y la zona del título queda despejada. Para cambiar el surtido: editar `skyStars` en `data/assets.json`.
+- **Fondo del cielo, en todas las pantallas**: las estrellitas de `fondo.png` se trocearon en 28 sprites (`assets/icons/new/fondo/`) y el fondo se genera nuevo en cada visita. En las páginas de proyecto el cielo va atenuado y fijo (no se desplaza con el scroll) para no pelear con la obra. No es azar puro (el random puro deja grumos y huecos feos): las posiciones salen de un muestreo **Poisson-disc** (puntos al azar con distancia mínima entre sí, el "blue noise" clásico para repartir estrellas), los tamaños siguen una **ley de potencias** (muchas pequeñas, pocas grandes, como las magnitudes del cielo real) y una **banda de mayor densidad** cruza la pantalla con ángulo aleatorio, como una vía láctea. Brillos y rotaciones varían por estrella, y la zona del título queda despejada. Para cambiar el surtido: editar `skyStars` en `data/assets.json`.
 - **Welcome** (`index.html`): fondo negro, título dibujado a mano en el centro (~60% del ancho × 40% del alto de la ventana) y las cuatro secciones como estrellas colocadas al azar. Cada estrella sin `icon` propio recibe un dibujo al azar de la bolsa de iconos (`iconPool` en `data/assets.json`), sin repetir hasta agotarla. Por ahora todas están quietas, pero cada una puede llevar `motion` (deriva, órbita o posición fija) — el código ya lo soporta, solo hay que añadir el campo en el JSON.
 - **Hover sobre una estrella** → aparece su sinopsis (campo `synopsis` del JSON).
 - **Cada sección** repite la plantilla del welcome: su título dibujado en el centro y sus proyectos como estrellas.
@@ -39,14 +39,18 @@ assets/             todas las imágenes, audio y vídeo
 
 ## Guía de edición (para Alekos)
 
-Cada recurso del JSON tiene siempre la misma forma:
+Casi todo admite una **forma corta** y una larga:
 
 ```json
-{ "name": "portada del ep", "src": "assets/music/primer-ep/portada.png" }
+"cover": "assets/comics/mi-proyecto/portada.png"          ← corta: la ruta a secas
+"cover": { "name": "portada", "src": "assets/..." }        ← larga: con nombre propio
+"gallery": ["01.png", "02.png"]                            ← corta: lista de rutas
+"gallery": { "layout": "horizontal", "images": ["01.png"] } ← larga: eligiendo dirección
+"text": "un párrafo"                                       ← corta
+"text": ["párrafo 1", "párrafo 2"]                         ← larga: varios párrafos
 ```
 
-- `name` es descriptivo (y sirve de texto alternativo de la imagen).
-- `src` es la ruta del archivo dentro del repo. Para cambiar un dibujo: sube el archivo nuevo a `assets/` y apunta el `src` ahí (o sustituye el archivo dejando el mismo nombre, sin tocar el JSON).
+En la forma corta el nombre se deriva del archivo. Sin `layout`, las galerías de comics se leen en horizontal y las del resto en vertical. Si un proyecto no lleva `name`, se usa su `id` sin guiones. Para cambiar un dibujo: sube el archivo nuevo a `assets/` y apunta el `src` ahí (o sustituye el archivo dejando el mismo nombre, sin tocar el JSON).
 
 En `data/assets.json` los recursos compartidos llevan además un `id` (`welcomeTitle`, `backButton`): es la variable con la que el código los encuentra — **no cambiar el `id`**, solo el `src`.
 
@@ -95,11 +99,16 @@ Un proyecto largo puede llevar `chapters`: entonces su pantalla se convierte en 
 
 ```json
 "tracks": [
-  { "name": "canción 1", "src": "assets/music/primer-ep/cancion-1.mp3" }
+  "assets/music/primer-ep/cancion-1.mp3",
+  { "name": "otro nombre", "src": "assets/music/primer-ep/cancion-2.mp3" }
 ]
 ```
 
 Si `src` está vacío se muestra solo el nombre, sin reproductor. Lo mismo con los vídeos de animación: `src` puede ser un `.mp4` propio o un enlace de embed (`https://www.youtube.com/embed/ID` o de Vimeo).
+
+### Música de fondo
+
+Hay una música ambiente opcional que suena **bajita y en bucle, sin ninguna interfaz**: se calla sola cuando el visitante reproduce un vídeo o una canción, y vuelve al terminar. Se activa poniendo la ruta de un mp3 en el recurso `backgroundMusic` de `data/assets.json` (el campo `volume`, de 0 a 1, regula lo bajita que va; por defecto 0.12). Nota: los navegadores bloquean el sonido automático, así que empieza a sonar con la primera interacción (un clic o una tecla).
 
 ### Los escaneos
 

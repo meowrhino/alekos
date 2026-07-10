@@ -1,5 +1,5 @@
 {
-  "_comentario": "Sección de animación. Cada proyecto puede llevar 'videos' (uno o varios; src puede ser un mp4 propio o un enlace de embed de YouTube/Vimeo — si src está vacío se ignora), 'text' y 'gallery'. Para YouTube usar el formato https://www.youtube.com/embed/ID",
+  "_comentario": "Sección de animación. 'videos' admite rutas mp4 propias o enlaces de embed (https://www.youtube.com/embed/ID o de Vimeo); puede ser una lista de rutas a secas o la forma larga {name, src, poster}; un src vacío se ignora (hueco reservado). 'text' y 'gallery' como en el resto (galería vertical por defecto).",
   "id": "animation",
   "title": {
     "name": "título de la sección (pendiente de escanear; con src vacío se usa la fuente)",
@@ -9,32 +9,21 @@
   "projects": [
     {
       "id": "loops",
-      "name": "loops",
       "synopsis": "Animaciones cortas que se muerden la cola: gifs, pruebas y bucles.",
       "videos": [
         {
           "name": "loop 1",
-          "src": "",
-          "poster": "assets/icons/new/trim_planeta1.png"
+          "src": ""
         }
       ],
       "text": [
         "Bucles cortos animados a mano, frame a frame.",
         "Cuando llegue el primer vídeo, basta con poner su ruta (o el enlace de YouTube/Vimeo) en el campo src del JSON."
       ],
-      "gallery": {
-        "layout": "vertical",
-        "images": [
-          {
-            "name": "fotograma 1",
-            "src": "assets/icons/new/trim_estrella1.png"
-          },
-          {
-            "name": "fotograma 2",
-            "src": "assets/icons/new/trim_estrella3.png"
-          }
-        ]
-      }
+      "gallery": [
+        "assets/icons/new/trim_estrella1.png",
+        "assets/icons/new/trim_estrella3.png"
+      ]
     }
   ]
 }

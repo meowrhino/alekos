@@ -71,9 +71,10 @@ img {
   line-height: 1;
 }
 
-/* fondo de estrellitas: detrás de todo, no responde al ratón */
+/* fondo de estrellitas: detrás de todo, no responde al ratón;
+   fixed para que no se desplace con el scroll de las páginas */
 .sky {
-  position: absolute;
+  position: fixed;
   inset: 0;
   pointer-events: none;
 }

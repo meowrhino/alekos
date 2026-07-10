@@ -10,6 +10,12 @@
       "id": "backButton",
       "name": "Botón de volver atrás (flecha dibujada a mano)",
       "src": "assets/icons/new/trim_back.png"
+    },
+    {
+      "id": "backgroundMusic",
+      "name": "Música de fondo (bucle bajito sin interfaz; con src vacío no suena; se calla sola si se reproduce un vídeo o canción)",
+      "src": "",
+      "volume": 0.12
     }
   ],
   "iconPool": [

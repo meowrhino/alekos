@@ -37,8 +37,47 @@ window.addEventListener('hashchange', route);
   UI = Object.fromEntries(assets.resources.map((r) => [r.id, r]));
   ICONS = assets.iconPool || [];
   SKY = assets.skyStars || [];
+  setupMusic();
   route();
 })();
+
+/* ---------- música de fondo ----------
+   Suena bajita en bucle, sin ninguna interfaz. Se calla sola cuando el
+   visitante reproduce un vídeo o una canción, y vuelve al terminar.
+   Los navegadores bloquean el autoplay con sonido, así que si el primer
+   intento falla, arranca con la primera interacción (clic o tecla).
+   Se activa poniendo un mp3 en el recurso 'backgroundMusic' de assets.json. */
+let bgMusic = null;
+
+function setupMusic() {
+  const src = UI.backgroundMusic?.src;
+  if (!src) return;
+  bgMusic = new Audio(src);
+  bgMusic.loop = true;
+  bgMusic.volume = UI.backgroundMusic.volume ?? 0.12;
+
+  const tryPlay = () => {
+    if (!mediaPlaying()) bgMusic.play().catch(() => {});
+  };
+  tryPlay();
+  window.addEventListener('pointerdown', tryPlay, { once: true });
+  window.addEventListener('keydown', tryPlay, { once: true });
+
+  // los eventos de <audio>/<video> no burbujean: se escuchan en captura
+  document.addEventListener('play', (e) => {
+    if (e.target !== bgMusic) bgMusic.pause();
+  }, true);
+  document.addEventListener('pause', resumeIfQuiet, true);
+  document.addEventListener('ended', resumeIfQuiet, true);
+}
+
+function resumeIfQuiet() {
+  if (bgMusic && !mediaPlaying()) bgMusic.play().catch(() => {});
+}
+
+function mediaPlaying() {
+  return [...document.querySelectorAll('audio, video')].some((m) => !m.paused && !m.ended);
+}
 
 /* Reparte los iconos de la bolsa al azar sin repetir ninguno
    hasta agotarla (entonces se rebaraja). */
@@ -58,6 +97,8 @@ async function route() {
   stopMotion();
   hideTooltip();
   window.scrollTo(0, 0);
+  // si el navegador quitó un vídeo/canción a media reproducción, la música vuelve
+  setTimeout(resumeIfQuiet, 150);
   const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean);
 
   try {
@@ -90,8 +131,8 @@ async function renderWelcome() {
   app.appendChild(titleEl(UI.welcomeTitle, 'akkrazzo di cane'));
   starfield(
     data.sections.map((s) => ({
-      icon: s.icon,
-      label: s.name,
+      icon: asAsset(s.icon),
+      label: displayName(s),
       synopsis: s.synopsis,
       motion: s.motion,
       href: `#/${s.id}`,
@@ -106,11 +147,11 @@ function renderSection(section) {
   app.innerHTML = '';
   const sky = skyBackground();
   if (sky) app.appendChild(sky);
-  app.appendChild(titleEl(section.title, section.title?.text || section.id));
+  app.appendChild(titleEl(asAsset(section.title), section.title?.text || section.id));
   starfield(
     section.projects.map((p) => ({
-      icon: p.icon,
-      label: p.name,
+      icon: asAsset(p.icon),
+      label: displayName(p),
       synopsis: p.synopsis,
       motion: p.motion,
       href: `#/${section.id}/${p.id}`,
@@ -130,15 +171,17 @@ function renderProject(section, project) {
 
   app.className = 'page';
   app.innerHTML = '';
+  const sky = skyBackground({ page: true });
+  if (sky) app.appendChild(sky);
   const main = document.createElement('main');
   main.className = 'project';
 
-  main.appendChild(heading(project.name));
-  if (project.cover) main.appendChild(coverEl(project.cover));
+  main.appendChild(heading(displayName(project)));
+  if (project.cover) main.appendChild(coverEl(asAsset(project.cover)));
   if (project.text) main.appendChild(textBlock(project.text));
-  if (project.videos) main.appendChild(videoBlock(project.videos));
-  if (project.tracks) main.appendChild(trackBlock(project.tracks));
-  if (project.gallery) main.appendChild(galleryEl(project.gallery));
+  if (project.videos) main.appendChild(videoBlock(asList(project.videos).map(asAsset)));
+  if (project.tracks) main.appendChild(trackBlock(asList(project.tracks).map(asAsset)));
+  if (project.gallery) main.appendChild(galleryEl(asGallery(project.gallery, section.id)));
 
   app.appendChild(main);
   app.appendChild(backButton(`#/${section.id}`));
@@ -154,15 +197,15 @@ function renderChapterCosmos(section, project) {
   app.innerHTML = '';
   const sky = skyBackground();
   if (sky) app.appendChild(sky);
-  app.appendChild(titleEl(project.cover, project.name));
+  app.appendChild(titleEl(asAsset(project.cover), displayName(project)));
 
   const placed = [];
   const total = project.chapters.length;
   project.chapters.forEach((chapter, index) => {
     const el = starEl(
       {
-        icon: chapter.icon || project.icon,
-        label: chapter.name,
+        icon: asAsset(chapter.icon || project.icon),
+        label: displayName(chapter),
         synopsis: chapter.synopsis,
         motion: chapter.motion,
         href: `#/${section.id}/${project.id}/${chapter.id}`,
@@ -180,18 +223,20 @@ function renderChapterCosmos(section, project) {
 function renderChapter(section, project, chapter) {
   app.className = 'page';
   app.innerHTML = '';
+  const sky = skyBackground({ page: true });
+  if (sky) app.appendChild(sky);
   const main = document.createElement('main');
   main.className = 'project';
 
-  main.appendChild(heading(project.name));
+  main.appendChild(heading(displayName(project)));
   const sub = document.createElement('h2');
   sub.className = 'project-subtitle blend';
-  sub.textContent = chapter.name;
+  sub.textContent = displayName(chapter);
   main.appendChild(sub);
 
-  if (chapter.cover) main.appendChild(coverEl(chapter.cover));
+  if (chapter.cover) main.appendChild(coverEl(asAsset(chapter.cover)));
   if (chapter.text) main.appendChild(textBlock(chapter.text));
-  if (chapter.gallery) main.appendChild(galleryEl(chapter.gallery));
+  if (chapter.gallery) main.appendChild(galleryEl(asGallery(chapter.gallery, section.id)));
 
   app.appendChild(main);
   app.appendChild(backButton(`#/${section.id}/${project.id}`));
@@ -200,6 +245,8 @@ function renderChapter(section, project, chapter) {
 function renderNotFound() {
   app.className = 'page';
   app.innerHTML = '';
+  const sky = skyBackground({ page: true });
+  if (sky) app.appendChild(sky);
   const main = document.createElement('main');
   main.className = 'project';
   main.appendChild(heading('esta estrella no existe'));
@@ -219,8 +266,9 @@ function renderNotFound() {
    - Una "vía láctea": banda de mayor densidad que cruza la pantalla con
      ángulo aleatorio; lejos de ella solo sobreviven algunas estrellas.
    - Brillos (opacidad) y rotaciones variadas.
-   La zona del título queda despejada. */
-function skyBackground() {
+   En las pantallas de cielo la zona del título queda despejada; en las
+   páginas de proyecto el cielo entero se atenúa para no pelear con la obra. */
+function skyBackground(opts = {}) {
   if (!SKY.length) return null;
   const layer = document.createElement('div');
   layer.className = 'sky';
@@ -237,10 +285,12 @@ function skyBackground() {
 
   const minDist = Math.max(46, Math.min(w, h) * 0.065);
   for (const [x, y] of poissonDisc(w, h, minDist)) {
-    // la zona del título queda libre
-    const px = (x / w) * 100;
-    const py = (y / h) * 100;
-    if (px > 18 && px < 82 && py > 28 && py < 70) continue;
+    // en las pantallas de cielo, la zona del título queda libre
+    if (!opts.page) {
+      const px = (x / w) * 100;
+      const py = (y / h) * 100;
+      if (px > 18 && px < 82 && py > 28 && py < 70) continue;
+    }
 
     // probabilidad de sobrevivir según la distancia a la banda
     const dist = Math.abs((x - centerX) * normalX + (y - centerY) * normalY);
@@ -255,7 +305,7 @@ function skyBackground() {
     img.style.width = size + 'px';
     img.style.left = x + 'px';
     img.style.top = y + 'px';
-    img.style.opacity = (0.4 + Math.random() * 0.6).toFixed(2);
+    img.style.opacity = (opts.page ? 0.2 + Math.random() * 0.35 : 0.4 + Math.random() * 0.6).toFixed(2);
     img.style.rotate = Math.floor(Math.random() * 360) + 'deg';
     layer.appendChild(img);
   }
@@ -440,6 +490,39 @@ function bindTooltip(el, text) {
 
 function hideTooltip() {
   tooltip.hidden = true;
+}
+
+/* ---------- normalizadores ----------
+   Los JSON aceptan una forma corta y una larga para casi todo:
+   - un recurso puede ser "ruta.png" o { "name": "...", "src": "ruta.png" }
+     (en la corta, el nombre se deriva del archivo)
+   - una galería puede ser ["a.png", "b.png"] o { "layout": "...", "images": [...] }
+     (sin layout: horizontal en comics, vertical en el resto)
+   - un texto puede ser "un párrafo" o ["párrafo 1", "párrafo 2"]
+   - 'name' es opcional: se deriva del id quitando los guiones */
+
+function asAsset(x) {
+  if (!x) return null;
+  if (typeof x !== 'string') return x;
+  const name = (x.split('/').pop() || '').replace(/\.[a-z0-9]+$/i, '').replaceAll('-', ' ');
+  return { name, src: x };
+}
+
+function asList(x) {
+  return [].concat(x || []);
+}
+
+function asGallery(gallery, sectionId) {
+  if (!gallery) return null;
+  if (Array.isArray(gallery)) gallery = { images: gallery };
+  return {
+    layout: gallery.layout || (sectionId === 'comics' ? 'horizontal' : 'vertical'),
+    images: (gallery.images || []).map(asAsset),
+  };
+}
+
+function displayName(item) {
+  return item.name || (item.id || '').replaceAll('-', ' ');
 }
 
 /* ---------- piezas reutilizables ---------- */
