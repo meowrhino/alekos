@@ -11,18 +11,35 @@
       "id": "primer-ep",
       "name": "primer ep",
       "synopsis": "Cuatro canciones grabadas en casa, con más eco del previsto.",
-      "icon": { "name": "icono del proyecto", "src": "assets/icons/spiral.svg" },
-      "cover": { "name": "portada del ep", "src": "assets/placeholders/cover.svg" },
+      "cover": {
+        "name": "portada del ep",
+        "src": "assets/placeholders/cover.svg"
+      },
       "tracks": [
-        { "name": "canción 1", "src": "" },
-        { "name": "canción 2", "src": "" },
-        { "name": "canción 3", "src": "" },
-        { "name": "canción 4", "src": "" }
+        {
+          "name": "canción 1",
+          "src": ""
+        },
+        {
+          "name": "canción 2",
+          "src": ""
+        },
+        {
+          "name": "canción 3",
+          "src": ""
+        },
+        {
+          "name": "canción 4",
+          "src": ""
+        }
       ],
       "gallery": {
         "layout": "vertical",
         "images": [
-          { "name": "foto de la grabación", "src": "assets/placeholders/page2.svg" }
+          {
+            "name": "foto de la grabación",
+            "src": "assets/placeholders/page2.svg"
+          }
         ]
       }
     }

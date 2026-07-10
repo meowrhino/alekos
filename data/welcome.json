@@ -1,47 +1,31 @@
 {
-  "_comentario": "Portada de la web. Cada sección es una estrella del menú: 'synopsis' es el texto que aparece al pasar el ratón. 'motion' puede ser: {type: 'fixed', x, y} (quieta, x/y en % de pantalla, opcionales), {type: 'orbit', radius, speed} (órbita; radius en vmin, speed en segundos por vuelta) o {type: 'drift', amplitude, speed} (flota a la deriva). 'decor' son estrellas decorativas sin enlace.",
+  "_comentario": "Portada de la web. Cada sección es una estrella del menú: 'synopsis' es el texto que aparece al pasar el ratón. Si una sección no lleva 'icon', recibe uno al azar de la bolsa (iconPool en assets.json). 'motion' es opcional y por ahora nada se mueve, pero está listo: {type: 'fixed', x, y} (quieta, x/y en % de pantalla), {type: 'orbit', radius, speed} (órbita; radius en vmin, speed en segundos por vuelta) o {type: 'drift', amplitude, speed} (flota a la deriva). 'decor' son estrellas decorativas sin enlace; sin 'src' también toman iconos al azar.",
   "sections": [
     {
       "id": "comics",
       "name": "comics",
-      "synopsis": "Historias en viñetas: series largas por capítulos y piezas cortas autoconclusivas.",
-      "icon": { "name": "icono de comics", "src": "assets/icons/star.svg" },
-      "motion": { "type": "drift", "amplitude": 2, "speed": 18 }
+      "synopsis": "Historias en viñetas: series largas por capítulos y piezas cortas autoconclusivas."
     },
     {
       "id": "illustrations",
       "name": "illustrations",
-      "synopsis": "Ilustración: tintas, bocetos y piezas sueltas sobre papel.",
-      "icon": { "name": "icono de ilustración", "src": "assets/icons/planet.svg" },
-      "motion": { "type": "orbit", "radius": 4, "speed": 28 }
+      "synopsis": "Ilustración: tintas, bocetos y piezas sueltas sobre papel."
     },
     {
       "id": "animation",
       "name": "animation",
-      "synopsis": "Animación: cortos, loops y experimentos en movimiento.",
-      "icon": { "name": "icono de animación", "src": "assets/icons/comet.svg" },
-      "motion": { "type": "drift", "amplitude": 3, "speed": 24 }
+      "synopsis": "Animación: cortos, loops y experimentos en movimiento."
     },
     {
       "id": "music",
       "name": "music",
-      "synopsis": "Música: álbumes, EPs y canciones sueltas.",
-      "icon": { "name": "icono de música", "src": "assets/icons/spiral.svg" },
-      "motion": { "type": "fixed" }
+      "synopsis": "Música: álbumes, EPs y canciones sueltas."
     }
   ],
   "decor": [
     {
-      "name": "estrellita decorativa",
-      "src": "assets/icons/sparkle.svg",
-      "count": 7,
-      "motion": { "type": "drift", "amplitude": 1.5, "speed": 32 }
-    },
-    {
-      "name": "luna",
-      "src": "assets/icons/moon.svg",
-      "count": 1,
-      "motion": { "type": "orbit", "radius": 7, "speed": 70 }
+      "name": "estrellas decorativas",
+      "count": 6
     }
   ]
 }

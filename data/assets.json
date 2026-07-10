@@ -1,5 +1,5 @@
 {
-  "_comentario": "Recursos compartidos de la interfaz. 'id' es la variable con la que el código los encuentra (no cambiarla), 'name' es solo descriptivo y 'src' es la ruta del archivo: para cambiar un dibujo basta con cambiar su src o sustituir el archivo.",
+  "_comentario": "Recursos compartidos. En 'resources', 'id' es la variable con la que el código los encuentra (no cambiarla) y 'src' la ruta del archivo. 'iconPool' es la bolsa de iconos: toda estrella que no lleve un 'icon' propio en su JSON recibe uno al azar de aquí — para añadir dibujos a la bolsa basta con añadir líneas. Los trim_*.png son los escaneos originales con el margen transparente recortado (los originales siguen al lado).",
   "resources": [
     {
       "id": "welcomeTitle",
@@ -9,7 +9,16 @@
     {
       "id": "backButton",
       "name": "Botón de volver atrás (flecha dibujada a mano)",
-      "src": "assets/ui/back.svg"
+      "src": "assets/icons/new/trim_back.png"
     }
+  ],
+  "iconPool": [
+    { "name": "estrella 1", "src": "assets/icons/new/trim_estrella1.png" },
+    { "name": "estrella 2", "src": "assets/icons/new/trim_estrella2.png" },
+    { "name": "estrella 3", "src": "assets/icons/new/trim_estrella3.png" },
+    { "name": "estrella 4", "src": "assets/icons/new/trim_estrella4.png" },
+    { "name": "estrella 4.2", "src": "assets/icons/new/trim_estrella4_2.png" },
+    { "name": "piedra 1", "src": "assets/icons/new/trim_piedra1.png" },
+    { "name": "planeta 1", "src": "assets/icons/new/trim_planeta1.png" }
   ]
 }

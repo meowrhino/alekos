@@ -17,6 +17,7 @@ async function loadJSON(path) {
 }
 
 let UI = {}; // recursos compartidos (data/assets.json), accesibles por id
+let ICONS = []; // bolsa de iconos para las estrellas sin icono propio
 const app = document.getElementById('app');
 const tooltip = document.getElementById('tooltip');
 
@@ -33,8 +34,23 @@ window.addEventListener('hashchange', route);
 (async function init() {
   const assets = await loadJSON('data/assets.json');
   UI = Object.fromEntries(assets.resources.map((r) => [r.id, r]));
+  ICONS = assets.iconPool || [];
   route();
 })();
+
+/* Reparte los iconos de la bolsa al azar sin repetir ninguno
+   hasta agotarla (entonces se rebaraja). */
+let iconBag = [];
+function randomIcon() {
+  if (!iconBag.length) {
+    iconBag = [...ICONS];
+    for (let i = iconBag.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [iconBag[i], iconBag[j]] = [iconBag[j], iconBag[i]];
+    }
+  }
+  return iconBag.pop();
+}
 
 async function route() {
   stopMotion();
@@ -190,10 +206,11 @@ function starfield(items, decor = []) {
   for (const item of items) {
     app.appendChild(starEl(item, placed));
   }
-  // recursos decorativos: no llevan enlace ni texto, solo flotan
+  // recursos decorativos: no llevan enlace ni texto, solo acompañan
   for (const d of decor || []) {
     for (let i = 0; i < (d.count || 1); i++) {
-      const el = starEl({ icon: { src: d.src, name: d.name }, motion: d.motion }, placed);
+      const icon = d.src ? { src: d.src, name: d.name } : undefined;
+      const el = starEl({ icon, motion: d.motion }, placed);
       el.classList.add('decor');
       app.appendChild(el);
     }
@@ -211,9 +228,11 @@ function starEl(item, placed) {
   el.style.left = pos.x + '%';
   el.style.top = pos.y + '%';
 
+  // sin icono propio en el JSON → uno al azar de la bolsa
+  const icon = item.icon || randomIcon();
   const img = document.createElement('img');
-  img.src = item.icon?.src || '';
-  img.alt = item.icon?.name || item.label || '';
+  img.src = icon?.src || '';
+  img.alt = icon?.name || item.label || '';
   img.onerror = () => (img.style.display = 'none');
   el.appendChild(img);
 

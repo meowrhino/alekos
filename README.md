@@ -8,7 +8,7 @@ Portfolio de Alekos: cómic, ilustración, animación y música. Un cielo negro 
 
 ## Cómo funciona
 
-- **Welcome** (`index.html`): fondo negro, título dibujado a mano en el centro (~60% del ancho × 40% del alto de la ventana) y las cuatro secciones como estrellas colocadas al azar. Algunas flotan a la deriva, otras orbitan y otras están fijas — se configura por estrella en el JSON.
+- **Welcome** (`index.html`): fondo negro, título dibujado a mano en el centro (~60% del ancho × 40% del alto de la ventana) y las cuatro secciones como estrellas colocadas al azar. Cada estrella sin `icon` propio recibe un dibujo al azar de la bolsa de iconos (`iconPool` en `data/assets.json`), sin repetir hasta agotarla. Por ahora todas están quietas, pero cada una puede llevar `motion` (deriva, órbita o posición fija) — el código ya lo soporta, solo hay que añadir el campo en el JSON.
 - **Hover sobre una estrella** → aparece su sinopsis (campo `synopsis` del JSON).
 - **Cada sección** repite la plantilla del welcome: su título dibujado en el centro y sus proyectos como estrellas.
 - **Cada proyecto** pinta solo los bloques que existen en su JSON, en este orden: portada → texto → vídeos → canciones → galería. La misma plantilla sirve para las cuatro secciones.
@@ -32,8 +32,9 @@ data/
   animation.json
   music.json
 assets/             todas las imágenes, audio y vídeo
-  ui/               título, botón de volver
-  icons/            iconos de estrella
+  ui/               títulos dibujados (aún placeholders)
+  icons/new/        escaneos reales de Alekos; los trim_*.png son los mismos
+                    con el margen transparente recortado (son los que usa la web)
   placeholders/     dibujos provisionales (sustituir por los escaneos)
 ```
 
@@ -58,15 +59,17 @@ Copia uno existente dentro de `projects` en el JSON de su sección y cambia:
 {
   "id": "mi-proyecto",            ← sin espacios ni tildes, será parte de la URL
   "name": "mi proyecto",          ← nombre visible bajo la estrella
-  "synopsis": "texto del hover",
-  "icon": { "name": "icono", "src": "assets/icons/star.svg" },
-  "motion": { "type": "drift" }   ← opcional: cómo se mueve su estrella
+  "synopsis": "texto del hover"
 }
 ```
+
+Opcionalmente puede llevar `icon` (`{ "name": "...", "src": "..." }`) para forzar un dibujo concreto — si no, recibe uno al azar de la bolsa `iconPool` de `data/assets.json` — y `motion` para que su estrella se mueva.
 
 y añade los bloques que tenga: `cover`, `text`, `videos`, `tracks`, `chapters`, `gallery`.
 
 ### Movimiento de las estrellas (`motion`)
+
+Por ahora ninguna estrella lo usa, pero basta añadir el campo a cualquier sección, proyecto, capítulo o decoración:
 
 | tipo | qué hace | opciones |
 |---|---|---|
@@ -101,7 +104,7 @@ Si `src` está vacío se muestra solo el nombre, sin reproductor. Lo mismo con l
 
 ### Los escaneos
 
-Los dibujos de `assets/placeholders/`, `assets/icons/` y `assets/ui/` son provisionales. Al sustituirlos por los escaneos reales, lo ideal es **PNG con fondo transparente** (o el dibujo sobre fondo blanco, que con el `mix-blend-mode: difference` se verá en negativo). Mantener los mismos nombres de archivo evita tocar los JSON.
+Los iconos ya son escaneos reales (`assets/icons/new/`). Para añadir más a la bolsa: subir el PNG (fondo transparente, mejor recortado al dibujo) y añadir una línea en `iconPool` de `data/assets.json`. Los dibujos de `assets/placeholders/` y los títulos de `assets/ui/` siguen siendo provisionales; al sustituirlos, mantener los mismos nombres de archivo evita tocar los JSON. `assets/icons/new/fondo.png` (una textura de estrellitas) está subido pero aún sin uso — pendiente de decidir si será fondo de pantalla.
 
 ⚠️ **Cuidado con las comas en los JSON**: cada elemento de una lista se separa con coma, pero el último no lleva. Se puede comprobar que un JSON es válido pegándolo en [jsonlint.com](https://jsonlint.com).
 

@@ -11,7 +11,6 @@
       "id": "tintas",
       "name": "tintas",
       "synopsis": "Serie de tintas sobre papel: perros, plantas y máquinas tristes.",
-      "icon": { "name": "icono del proyecto", "src": "assets/icons/planet.svg" },
       "text": [
         "Serie de tintas hecha entre 2024 y 2025, casi toda de noche.",
         "Empezó como ejercicio de calentamiento antes de dibujar cómic y acabó teniendo vida propia: perros, plantas y máquinas tristes que se repiten hasta convertirse en un pequeño idioma."
@@ -19,9 +18,18 @@
       "gallery": {
         "layout": "vertical",
         "images": [
-          { "name": "tinta 1", "src": "assets/placeholders/page1.svg" },
-          { "name": "tinta 2", "src": "assets/placeholders/page2.svg" },
-          { "name": "tinta 3", "src": "assets/placeholders/page3.svg" }
+          {
+            "name": "tinta 1",
+            "src": "assets/placeholders/page1.svg"
+          },
+          {
+            "name": "tinta 2",
+            "src": "assets/placeholders/page2.svg"
+          },
+          {
+            "name": "tinta 3",
+            "src": "assets/placeholders/page3.svg"
+          }
         ]
       }
     },
@@ -29,15 +37,20 @@
       "id": "bocetos",
       "name": "bocetos",
       "synopsis": "Páginas de cuaderno: lo que pasa antes de que las cosas sean cosas.",
-      "icon": { "name": "icono del proyecto", "src": "assets/icons/sparkle.svg" },
       "text": [
         "Selección de páginas de cuaderno. Lo que pasa antes de que las cosas sean cosas."
       ],
       "gallery": {
         "layout": "vertical",
         "images": [
-          { "name": "boceto 1", "src": "assets/placeholders/page2.svg" },
-          { "name": "boceto 2", "src": "assets/placeholders/page4.svg" }
+          {
+            "name": "boceto 1",
+            "src": "assets/placeholders/page2.svg"
+          },
+          {
+            "name": "boceto 2",
+            "src": "assets/placeholders/page4.svg"
+          }
         ]
       }
     }

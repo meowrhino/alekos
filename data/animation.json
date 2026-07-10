@@ -11,9 +11,12 @@
       "id": "loops",
       "name": "loops",
       "synopsis": "Animaciones cortas que se muerden la cola: gifs, pruebas y bucles.",
-      "icon": { "name": "icono del proyecto", "src": "assets/icons/comet.svg" },
       "videos": [
-        { "name": "loop 1", "src": "", "poster": "assets/placeholders/cover.svg" }
+        {
+          "name": "loop 1",
+          "src": "",
+          "poster": "assets/placeholders/cover.svg"
+        }
       ],
       "text": [
         "Bucles cortos animados a mano, frame a frame.",
@@ -22,8 +25,14 @@
       "gallery": {
         "layout": "vertical",
         "images": [
-          { "name": "fotograma 1", "src": "assets/placeholders/page1.svg" },
-          { "name": "fotograma 2", "src": "assets/placeholders/page3.svg" }
+          {
+            "name": "fotograma 1",
+            "src": "assets/placeholders/page1.svg"
+          },
+          {
+            "name": "fotograma 2",
+            "src": "assets/placeholders/page3.svg"
+          }
         ]
       }
     }
