@@ -18,6 +18,7 @@ async function loadJSON(path) {
 
 let UI = {}; // recursos compartidos (data/assets.json), accesibles por id
 let ICONS = []; // bolsa de iconos para las estrellas sin icono propio
+let SKY = []; // estrellitas troceadas de fondo.png para el fondo del cielo
 const app = document.getElementById('app');
 const tooltip = document.getElementById('tooltip');
 
@@ -35,6 +36,7 @@ window.addEventListener('hashchange', route);
   const assets = await loadJSON('data/assets.json');
   UI = Object.fromEntries(assets.resources.map((r) => [r.id, r]));
   ICONS = assets.iconPool || [];
+  SKY = assets.skyStars || [];
   route();
 })();
 
@@ -83,6 +85,8 @@ async function renderWelcome() {
   const data = await loadJSON('data/welcome.json');
   app.className = 'cosmos';
   app.innerHTML = '';
+  const sky = skyBackground();
+  if (sky) app.appendChild(sky);
   app.appendChild(titleEl(UI.welcomeTitle, 'akkrazzo di cane'));
   starfield(
     data.sections.map((s) => ({
@@ -100,6 +104,8 @@ async function renderWelcome() {
 function renderSection(section) {
   app.className = 'cosmos';
   app.innerHTML = '';
+  const sky = skyBackground();
+  if (sky) app.appendChild(sky);
   app.appendChild(titleEl(section.title, section.title?.text || section.id));
   starfield(
     section.projects.map((p) => ({
@@ -146,6 +152,8 @@ function renderProject(section, project) {
 function renderChapterCosmos(section, project) {
   app.className = 'cosmos';
   app.innerHTML = '';
+  const sky = skyBackground();
+  if (sky) app.appendChild(sky);
   app.appendChild(titleEl(project.cover, project.name));
 
   const placed = [];
@@ -197,6 +205,108 @@ function renderNotFound() {
   main.appendChild(heading('esta estrella no existe'));
   app.appendChild(main);
   app.appendChild(backButton('#/'));
+}
+
+/* ---------- fondo de estrellitas ----------
+   Se genera nuevo en cada visita con las estrellitas muestreadas de
+   fondo.png. No es random puro: los cielos random puro salen con grumos
+   y huecos feos. En su lugar:
+   - Poisson-disc (algoritmo de Bridson): puntos al azar pero nunca más
+     cerca de una distancia mínima — el "blue noise" que se usa para
+     repartir estrellas y árboles en videojuegos, orgánico y uniforme.
+   - Tamaños por ley de potencias: muchas estrellas pequeñas y pocas
+     grandes, como las magnitudes del cielo real.
+   - Una "vía láctea": banda de mayor densidad que cruza la pantalla con
+     ángulo aleatorio; lejos de ella solo sobreviven algunas estrellas.
+   - Brillos (opacidad) y rotaciones variadas.
+   La zona del título queda despejada. */
+function skyBackground() {
+  if (!SKY.length) return null;
+  const layer = document.createElement('div');
+  layer.className = 'sky';
+  const w = innerWidth;
+  const h = innerHeight;
+
+  // banda de densidad: una recta con ángulo y desplazamiento al azar
+  const angle = Math.random() * Math.PI;
+  const normalX = -Math.sin(angle);
+  const normalY = Math.cos(angle);
+  const centerX = w * (0.3 + Math.random() * 0.4);
+  const centerY = h * (0.3 + Math.random() * 0.4);
+  const bandWidth = Math.min(w, h) * 0.3;
+
+  const minDist = Math.max(46, Math.min(w, h) * 0.065);
+  for (const [x, y] of poissonDisc(w, h, minDist)) {
+    // la zona del título queda libre
+    const px = (x / w) * 100;
+    const py = (y / h) * 100;
+    if (px > 18 && px < 82 && py > 28 && py < 70) continue;
+
+    // probabilidad de sobrevivir según la distancia a la banda
+    const dist = Math.abs((x - centerX) * normalX + (y - centerY) * normalY);
+    const keep = 0.3 + 0.7 * Math.exp(-((dist / bandWidth) ** 2));
+    if (Math.random() > keep) continue;
+
+    const img = document.createElement('img');
+    const sprite = SKY[Math.floor(Math.random() * SKY.length)];
+    img.src = sprite.src;
+    img.alt = '';
+    const size = 7 + Math.pow(Math.random(), 2.4) * 26; // px
+    img.style.width = size + 'px';
+    img.style.left = x + 'px';
+    img.style.top = y + 'px';
+    img.style.opacity = (0.4 + Math.random() * 0.6).toFixed(2);
+    img.style.rotate = Math.floor(Math.random() * 360) + 'deg';
+    layer.appendChild(img);
+  }
+  return layer;
+}
+
+/* Poisson-disc sampling (Bridson): rellena el plano con puntos separados
+   al menos 'r' px, probando k candidatos alrededor de cada punto activo. */
+function poissonDisc(w, h, r, k = 20) {
+  const cell = r / Math.SQRT2;
+  const gw = Math.ceil(w / cell);
+  const gh = Math.ceil(h / cell);
+  const grid = new Array(gw * gh).fill(-1);
+  const pts = [];
+  const active = [];
+
+  const fits = (x, y) => {
+    const gx = Math.floor(x / cell);
+    const gy = Math.floor(y / cell);
+    for (let i = Math.max(0, gx - 2); i <= Math.min(gw - 1, gx + 2); i++) {
+      for (let j = Math.max(0, gy - 2); j <= Math.min(gh - 1, gy + 2); j++) {
+        const q = grid[i + j * gw];
+        if (q >= 0 && Math.hypot(pts[q][0] - x, pts[q][1] - y) < r) return false;
+      }
+    }
+    return true;
+  };
+  const add = (x, y) => {
+    grid[Math.floor(x / cell) + Math.floor(y / cell) * gw] = pts.length;
+    pts.push([x, y]);
+    active.push(pts.length - 1);
+  };
+
+  add(Math.random() * w, Math.random() * h);
+  while (active.length) {
+    const pick = Math.floor(Math.random() * active.length);
+    const [ax, ay] = pts[active[pick]];
+    let placed = false;
+    for (let t = 0; t < k; t++) {
+      const a = Math.random() * Math.PI * 2;
+      const d = r * (1 + Math.random());
+      const x = ax + Math.cos(a) * d;
+      const y = ay + Math.sin(a) * d;
+      if (x < 0 || x >= w || y < 0 || y >= h || !fits(x, y)) continue;
+      add(x, y);
+      placed = true;
+      break;
+    }
+    if (!placed) active.splice(pick, 1);
+  }
+  return pts;
 }
 
 /* ---------- cielo de estrellas ---------- */

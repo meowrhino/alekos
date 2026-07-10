@@ -8,6 +8,7 @@ Portfolio de Alekos: cómic, ilustración, animación y música. Un cielo negro 
 
 ## Cómo funciona
 
+- **Fondo del cielo**: las estrellitas de `fondo.png` se trocearon en 28 sprites (`assets/icons/new/fondo/`) y el fondo se genera nuevo en cada visita. No es azar puro (el random puro deja grumos y huecos feos): las posiciones salen de un muestreo **Poisson-disc** (puntos al azar con distancia mínima entre sí, el "blue noise" clásico para repartir estrellas), los tamaños siguen una **ley de potencias** (muchas pequeñas, pocas grandes, como las magnitudes del cielo real) y una **banda de mayor densidad** cruza la pantalla con ángulo aleatorio, como una vía láctea. Brillos y rotaciones varían por estrella, y la zona del título queda despejada. Para cambiar el surtido: editar `skyStars` en `data/assets.json`.
 - **Welcome** (`index.html`): fondo negro, título dibujado a mano en el centro (~60% del ancho × 40% del alto de la ventana) y las cuatro secciones como estrellas colocadas al azar. Cada estrella sin `icon` propio recibe un dibujo al azar de la bolsa de iconos (`iconPool` en `data/assets.json`), sin repetir hasta agotarla. Por ahora todas están quietas, pero cada una puede llevar `motion` (deriva, órbita o posición fija) — el código ya lo soporta, solo hay que añadir el campo en el JSON.
 - **Hover sobre una estrella** → aparece su sinopsis (campo `synopsis` del JSON).
 - **Cada sección** repite la plantilla del welcome: su título dibujado en el centro y sus proyectos como estrellas.

@@ -71,6 +71,18 @@ img {
   line-height: 1;
 }
 
+/* fondo de estrellitas: detrás de todo, no responde al ratón */
+.sky {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.sky img {
+  position: absolute;
+  translate: -50% -50%;
+}
+
 /* estrellas del menú */
 .star {
   position: absolute;

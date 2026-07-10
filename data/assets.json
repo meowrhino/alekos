@@ -1,5 +1,5 @@
 {
-  "_comentario": "Recursos compartidos. En 'resources', 'id' es la variable con la que el código los encuentra (no cambiarla) y 'src' la ruta del archivo. 'iconPool' es la bolsa de iconos: toda estrella que no lleve un 'icon' propio en su JSON recibe uno al azar de aquí — para añadir dibujos a la bolsa basta con añadir líneas. Los trim_*.png son los escaneos originales con el margen transparente recortado (los originales siguen al lado).",
+  "_comentario": "Recursos compartidos. En 'resources', 'id' es la variable con la que el código los encuentra (no cambiarla) y 'src' la ruta del archivo. 'iconPool' es la bolsa de iconos: toda estrella que no lleve un 'icon' propio en su JSON recibe uno al azar de aquí — para añadir dibujos a la bolsa basta con añadir líneas. Los trim_*.png son los escaneos originales con el margen transparente recortado (los originales siguen al lado). 'skyStars' son las estrellitas troceadas de fondo.png: el fondo del cielo se genera con ellas en cada visita.",
   "resources": [
     {
       "id": "welcomeTitle",
@@ -13,12 +13,147 @@
     }
   ],
   "iconPool": [
-    { "name": "estrella 1", "src": "assets/icons/new/trim_estrella1.png" },
-    { "name": "estrella 2", "src": "assets/icons/new/trim_estrella2.png" },
-    { "name": "estrella 3", "src": "assets/icons/new/trim_estrella3.png" },
-    { "name": "estrella 4", "src": "assets/icons/new/trim_estrella4.png" },
-    { "name": "estrella 4.2", "src": "assets/icons/new/trim_estrella4_2.png" },
-    { "name": "piedra 1", "src": "assets/icons/new/trim_piedra1.png" },
-    { "name": "planeta 1", "src": "assets/icons/new/trim_planeta1.png" }
+    {
+      "name": "estrella 1",
+      "src": "assets/icons/new/trim_estrella1.png"
+    },
+    {
+      "name": "estrella 2",
+      "src": "assets/icons/new/trim_estrella2.png"
+    },
+    {
+      "name": "estrella 3",
+      "src": "assets/icons/new/trim_estrella3.png"
+    },
+    {
+      "name": "estrella 4",
+      "src": "assets/icons/new/trim_estrella4.png"
+    },
+    {
+      "name": "estrella 4.2",
+      "src": "assets/icons/new/trim_estrella4_2.png"
+    },
+    {
+      "name": "piedra 1",
+      "src": "assets/icons/new/trim_piedra1.png"
+    },
+    {
+      "name": "planeta 1",
+      "src": "assets/icons/new/trim_planeta1.png"
+    }
+  ],
+  "skyStars": [
+    {
+      "name": "estrellita del fondo 1",
+      "src": "assets/icons/new/fondo/star_01.png"
+    },
+    {
+      "name": "estrellita del fondo 2",
+      "src": "assets/icons/new/fondo/star_02.png"
+    },
+    {
+      "name": "estrellita del fondo 3",
+      "src": "assets/icons/new/fondo/star_03.png"
+    },
+    {
+      "name": "estrellita del fondo 4",
+      "src": "assets/icons/new/fondo/star_04.png"
+    },
+    {
+      "name": "estrellita del fondo 5",
+      "src": "assets/icons/new/fondo/star_05.png"
+    },
+    {
+      "name": "estrellita del fondo 6",
+      "src": "assets/icons/new/fondo/star_06.png"
+    },
+    {
+      "name": "estrellita del fondo 7",
+      "src": "assets/icons/new/fondo/star_07.png"
+    },
+    {
+      "name": "estrellita del fondo 8",
+      "src": "assets/icons/new/fondo/star_08.png"
+    },
+    {
+      "name": "estrellita del fondo 9",
+      "src": "assets/icons/new/fondo/star_09.png"
+    },
+    {
+      "name": "estrellita del fondo 10",
+      "src": "assets/icons/new/fondo/star_10.png"
+    },
+    {
+      "name": "estrellita del fondo 11",
+      "src": "assets/icons/new/fondo/star_11.png"
+    },
+    {
+      "name": "estrellita del fondo 12",
+      "src": "assets/icons/new/fondo/star_12.png"
+    },
+    {
+      "name": "estrellita del fondo 13",
+      "src": "assets/icons/new/fondo/star_13.png"
+    },
+    {
+      "name": "estrellita del fondo 14",
+      "src": "assets/icons/new/fondo/star_14.png"
+    },
+    {
+      "name": "estrellita del fondo 15",
+      "src": "assets/icons/new/fondo/star_15.png"
+    },
+    {
+      "name": "estrellita del fondo 16",
+      "src": "assets/icons/new/fondo/star_16.png"
+    },
+    {
+      "name": "estrellita del fondo 17",
+      "src": "assets/icons/new/fondo/star_17.png"
+    },
+    {
+      "name": "estrellita del fondo 18",
+      "src": "assets/icons/new/fondo/star_18.png"
+    },
+    {
+      "name": "estrellita del fondo 19",
+      "src": "assets/icons/new/fondo/star_19.png"
+    },
+    {
+      "name": "estrellita del fondo 20",
+      "src": "assets/icons/new/fondo/star_20.png"
+    },
+    {
+      "name": "estrellita del fondo 21",
+      "src": "assets/icons/new/fondo/star_21.png"
+    },
+    {
+      "name": "estrellita del fondo 22",
+      "src": "assets/icons/new/fondo/star_22.png"
+    },
+    {
+      "name": "estrellita del fondo 23",
+      "src": "assets/icons/new/fondo/star_23.png"
+    },
+    {
+      "name": "estrellita del fondo 24",
+      "src": "assets/icons/new/fondo/star_24.png"
+    },
+    {
+      "name": "estrellita del fondo 25",
+      "src": "assets/icons/new/fondo/star_25.png"
+    },
+    {
+      "name": "estrellita del fondo 26",
+      "src": "assets/icons/new/fondo/star_26.png"
+    },
+    {
+      "name": "estrellita del fondo 27",
+      "src": "assets/icons/new/fondo/star_27.png"
+    },
+    {
+      "name": "estrellita del fondo 28",
+      "src": "assets/icons/new/fondo/star_28.png"
+    }
   ]
 }
