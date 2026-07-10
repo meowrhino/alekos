@@ -11,7 +11,8 @@ Portfolio de Alekos: cómic, ilustración, animación y música. Un cielo negro 
 - **Welcome** (`index.html`): fondo negro, título dibujado a mano en el centro (~60% del ancho × 40% del alto de la ventana) y las cuatro secciones como estrellas colocadas al azar. Algunas flotan a la deriva, otras orbitan y otras están fijas — se configura por estrella en el JSON.
 - **Hover sobre una estrella** → aparece su sinopsis (campo `synopsis` del JSON).
 - **Cada sección** repite la plantilla del welcome: su título dibujado en el centro y sus proyectos como estrellas.
-- **Cada proyecto** pinta solo los bloques que existen en su JSON, en este orden: portada → texto → vídeos → canciones → capítulos → galería. La misma plantilla sirve para las cuatro secciones.
+- **Cada proyecto** pinta solo los bloques que existen en su JSON, en este orden: portada → texto → vídeos → canciones → galería. La misma plantilla sirve para las cuatro secciones.
+- **Proyecto con capítulos** → su pantalla es otro cielo: la portada del proyecto ocupa el centro y la pantalla se divide en tantas franjas verticales como capítulos. Cada capítulo aparece en un punto aleatorio dentro de su franja, así la colocación es azarosa pero el orden de lectura se conserva de izquierda a derecha.
 - **Botón de volver**: siempre abajo a la izquierda, sube un nivel (capítulo → proyecto → sección → welcome).
 - **Estética**: fuente [Darumadrop One](https://fonts.google.com/specimen/Darumadrop+One) y todos los dibujos/textos con `mix-blend-mode: difference`, así se ven en blanco (en negativo) sobre el negro.
 
@@ -86,7 +87,7 @@ y añade los bloques que tenga: `cover`, `text`, `videos`, `tracks`, `chapters`,
 
 ### Capítulos (cómics y lo que haga falta)
 
-Un proyecto largo puede llevar `chapters` en vez de (o además de) su galería. Cada capítulo tiene su propio `id`, `name`, `synopsis` (hover en la lista de capítulos), `cover` y `gallery`. Ver `perro-cosmico` en [`data/comics.json`](data/comics.json) como ejemplo.
+Un proyecto largo puede llevar `chapters`: entonces su pantalla se convierte en un cielo de capítulos (portada en el centro, capítulos como estrellas ordenadas de izquierda a derecha). Cada capítulo tiene su propio `id`, `name`, `synopsis` (el texto del hover), `cover` y `gallery`, y opcionalmente `icon` y `motion` propios (si no, hereda el icono del proyecto). Ver `perro-cosmico` en [`data/comics.json`](data/comics.json) como ejemplo.
 
 ### Música
 

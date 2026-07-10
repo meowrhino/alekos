@@ -96,7 +96,9 @@ img {
 
 .star .label {
   font-size: clamp(0.95rem, 2.4vmin, 1.4rem);
-  white-space: nowrap;
+  max-width: 16ch;
+  text-align: center;
+  line-height: 1.15;
 }
 
 /* estrellas decorativas: no se pueden clicar */
@@ -232,22 +234,6 @@ img {
 
 .gallery-v img {
   max-width: min(100%, 800px);
-}
-
-/* ---------- capítulos ---------- */
-
-.chapters {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  align-items: center;
-  font-size: clamp(1.4rem, 4vmin, 2rem);
-  text-align: center;
-}
-
-.chapters a:hover {
-  text-decoration: underline wavy;
-  text-underline-offset: 6px;
 }
 
 /* ---------- vídeo y audio ---------- */

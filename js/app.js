@@ -100,9 +100,12 @@ function renderSection(section) {
 }
 
 /* Un proyecto pinta solo los bloques que existen en su JSON,
-   en este orden: portada → texto → vídeos → pistas → capítulos → galería.
-   Así la misma plantilla sirve para cómic, ilustración, animación y música. */
+   en este orden: portada → texto → vídeos → pistas → galería.
+   Así la misma plantilla sirve para cómic, ilustración, animación y música.
+   Si el proyecto tiene capítulos, en vez de página es otro cielo. */
 function renderProject(section, project) {
+  if (project.chapters) return renderChapterCosmos(section, project);
+
   app.className = 'page';
   app.innerHTML = '';
   const main = document.createElement('main');
@@ -113,11 +116,41 @@ function renderProject(section, project) {
   if (project.text) main.appendChild(textBlock(project.text));
   if (project.videos) main.appendChild(videoBlock(project.videos));
   if (project.tracks) main.appendChild(trackBlock(project.tracks));
-  if (project.chapters) main.appendChild(chapterList(section, project));
   if (project.gallery) main.appendChild(galleryEl(project.gallery));
 
   app.appendChild(main);
   app.appendChild(backButton(`#/${section.id}`));
+}
+
+/* Proyecto con capítulos: la portada del proyecto ocupa el centro
+   (como el título del welcome) y la pantalla se divide en tantas
+   franjas verticales como capítulos. Cada capítulo aparece en un punto
+   aleatorio DENTRO de su franja: colocación azarosa, pero el orden de
+   lectura se mantiene de izquierda a derecha. */
+function renderChapterCosmos(section, project) {
+  app.className = 'cosmos';
+  app.innerHTML = '';
+  app.appendChild(titleEl(project.cover, project.name));
+
+  const placed = [];
+  const total = project.chapters.length;
+  project.chapters.forEach((chapter, index) => {
+    const el = starEl(
+      {
+        icon: chapter.icon || project.icon,
+        label: chapter.name,
+        synopsis: chapter.synopsis,
+        motion: chapter.motion,
+        href: `#/${section.id}/${project.id}/${chapter.id}`,
+        band: { index, total },
+      },
+      placed
+    );
+    app.appendChild(el);
+  });
+
+  app.appendChild(backButton(`#/${section.id}`));
+  startMotion();
 }
 
 function renderChapter(section, project, chapter) {
@@ -174,7 +207,7 @@ function starEl(item, placed) {
 
   const m = item.motion || {};
   // "fixed" con x/y en el JSON respeta esa posición; si no, posición aleatoria
-  const pos = m.type === 'fixed' && m.x != null ? { x: m.x, y: m.y } : randomPos(placed);
+  const pos = m.type === 'fixed' && m.x != null ? { x: m.x, y: m.y } : randomPos(placed, item.band);
   el.style.left = pos.x + '%';
   el.style.top = pos.y + '%';
 
@@ -199,20 +232,28 @@ function starEl(item, placed) {
 }
 
 /* Posición aleatoria en % del viewport que evita la zona del título
-   (el centro, 60dvw × 40dvh) y no se pega a otras estrellas. */
-function randomPos(placed) {
+   (el centro, 60dvw × 40dvh) y no se pega a otras estrellas.
+   Si llega 'band' (capítulos), la x se limita a su franja vertical
+   para conservar el orden de lectura. */
+function randomPos(placed, band) {
+  const bandX = () => {
+    if (!band) return 9 + Math.random() * 82;
+    const width = 82 / band.total;
+    return 9 + band.index * width + Math.random() * width;
+  };
   for (let i = 0; i < 300; i++) {
-    const x = 9 + Math.random() * 82;
+    const x = bandX();
     const y = 9 + Math.random() * 78;
     const inTitle = x > 15 && x < 77 && y > 25 && y < 72;
-    const minDist = Math.max(8, 17 - i * 0.05); // se relaja si cuesta encontrar hueco
+    const minDist = Math.max(6, 17 - i * 0.05); // se relaja si cuesta encontrar hueco
     const tooClose = placed.some((p) => Math.hypot(p.x - x, p.y - y) < minDist);
     if (!inTitle && !tooClose) {
       placed.push({ x, y });
       return { x, y };
     }
   }
-  const fallback = { x: 9 + Math.random() * 82, y: 9 + Math.random() * 78 };
+  // último recurso: cualquier punto de la franja fuera de la zona del título
+  const fallback = { x: bandX(), y: Math.random() < 0.5 ? 9 + Math.random() * 15 : 74 + Math.random() * 13 };
   placed.push(fallback);
   return fallback;
 }
@@ -352,19 +393,6 @@ function galleryEl(gallery) {
     );
   }
   return wrap;
-}
-
-function chapterList(section, project) {
-  const nav = document.createElement('nav');
-  nav.className = 'chapters blend';
-  for (const chapter of project.chapters) {
-    const a = document.createElement('a');
-    a.href = `#/${section.id}/${project.id}/${chapter.id}`;
-    a.textContent = chapter.name;
-    if (chapter.synopsis) bindTooltip(a, chapter.synopsis);
-    nav.appendChild(a);
-  }
-  return nav;
 }
 
 function videoBlock(videos) {

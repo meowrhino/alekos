@@ -1,5 +1,5 @@
 {
-  "_comentario": "Sección de cómics. Un proyecto simple lleva 'cover' + 'gallery'. Un proyecto largo puede llevar 'chapters': cada capítulo tiene su propia portada y galería. Las galerías de cómic suelen ser layout 'horizontal' (se leen de lado).",
+  "_comentario": "Sección de cómics. Un proyecto simple lleva 'cover' + 'gallery'. Un proyecto largo puede llevar 'chapters': su pantalla se convierte en otro cielo con la portada en el centro y los capítulos como estrellas, ordenados de izquierda a derecha en franjas (posición aleatoria dentro de cada franja). Cada capítulo tiene su propia portada y galería, y puede llevar 'icon' y 'motion' propios. Las galerías de cómic suelen ser layout 'horizontal' (se leen de lado).",
   "id": "comics",
   "title": {
     "name": "título de la sección dibujado a mano",

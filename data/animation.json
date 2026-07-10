@@ -20,7 +20,7 @@
         "Cuando llegue el primer vídeo, basta con poner su ruta (o el enlace de YouTube/Vimeo) en el campo src del JSON."
       ],
       "gallery": {
-        "layout": "horizontal",
+        "layout": "vertical",
         "images": [
           { "name": "fotograma 1", "src": "assets/placeholders/page1.svg" },
           { "name": "fotograma 2", "src": "assets/placeholders/page3.svg" }
