@@ -2,8 +2,8 @@
   "_comentario": "Sección de cómics. Un proyecto simple lleva 'cover' + 'gallery'. Un proyecto largo puede llevar 'chapters': su pantalla se convierte en otro cielo con la portada en el centro y los capítulos como estrellas, ordenados de izquierda a derecha en franjas (posición aleatoria dentro de cada franja). Cada capítulo tiene su propia portada y galería, y puede llevar 'icon' y 'motion' propios. Las galerías de cómic suelen ser layout 'horizontal' (se leen de lado).",
   "id": "comics",
   "title": {
-    "name": "título de la sección dibujado a mano",
-    "src": "assets/ui/title-comics.svg",
+    "name": "título de la sección (pendiente de escanear; con src vacío se usa la fuente)",
+    "src": "",
     "text": "comics"
   },
   "projects": [
@@ -13,7 +13,7 @@
       "synopsis": "Serie larga por capítulos: un perro callejero descubre que puede perseguir cometas.",
       "cover": {
         "name": "portada de perro cósmico",
-        "src": "assets/placeholders/cover.svg"
+        "src": "assets/icons/new/trim_planeta1.png"
       },
       "chapters": [
         {
@@ -22,26 +22,26 @@
           "synopsis": "El perro descubre que el charco de la plaza refleja otro cielo.",
           "cover": {
             "name": "portada del capítulo 1",
-            "src": "assets/placeholders/cover.svg"
+            "src": "assets/icons/new/trim_planeta1.png"
           },
           "gallery": {
             "layout": "horizontal",
             "images": [
               {
                 "name": "página 1",
-                "src": "assets/placeholders/page1.svg"
+                "src": "assets/icons/new/trim_estrella1.png"
               },
               {
                 "name": "página 2",
-                "src": "assets/placeholders/page2.svg"
+                "src": "assets/icons/new/trim_estrella2.png"
               },
               {
                 "name": "página 3",
-                "src": "assets/placeholders/page3.svg"
+                "src": "assets/icons/new/trim_estrella3.png"
               },
               {
                 "name": "página 4",
-                "src": "assets/placeholders/page4.svg"
+                "src": "assets/icons/new/trim_estrella4.png"
               }
             ]
           }
@@ -52,22 +52,22 @@
           "synopsis": "Primer salto: el perro se agarra a la cola de un cometa perdido.",
           "cover": {
             "name": "portada del capítulo 2",
-            "src": "assets/placeholders/cover.svg"
+            "src": "assets/icons/new/trim_planeta1.png"
           },
           "gallery": {
             "layout": "horizontal",
             "images": [
               {
                 "name": "página 1",
-                "src": "assets/placeholders/page1.svg"
+                "src": "assets/icons/new/trim_estrella1.png"
               },
               {
                 "name": "página 2",
-                "src": "assets/placeholders/page2.svg"
+                "src": "assets/icons/new/trim_estrella2.png"
               },
               {
                 "name": "página 3",
-                "src": "assets/placeholders/page3.svg"
+                "src": "assets/icons/new/trim_estrella3.png"
               }
             ]
           }
@@ -80,26 +80,26 @@
       "synopsis": "Piezas breves autoconclusivas, dibujadas del tirón.",
       "cover": {
         "name": "portada de historias cortas",
-        "src": "assets/placeholders/cover.svg"
+        "src": "assets/icons/new/trim_planeta1.png"
       },
       "gallery": {
         "layout": "horizontal",
         "images": [
           {
             "name": "página 1",
-            "src": "assets/placeholders/page1.svg"
+            "src": "assets/icons/new/trim_estrella1.png"
           },
           {
             "name": "página 2",
-            "src": "assets/placeholders/page2.svg"
+            "src": "assets/icons/new/trim_estrella2.png"
           },
           {
             "name": "página 3",
-            "src": "assets/placeholders/page3.svg"
+            "src": "assets/icons/new/trim_estrella3.png"
           },
           {
             "name": "página 4",
-            "src": "assets/placeholders/page4.svg"
+            "src": "assets/icons/new/trim_estrella4.png"
           }
         ]
       }

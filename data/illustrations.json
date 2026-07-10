@@ -2,8 +2,8 @@
   "_comentario": "Sección de ilustración. Cada proyecto lleva 'text' (uno o varios párrafos, uno por línea del array) y 'gallery'. El layout de cada galería se elige aquí: 'vertical' u 'horizontal'.",
   "id": "illustrations",
   "title": {
-    "name": "título de la sección dibujado a mano",
-    "src": "assets/ui/title-illustrations.svg",
+    "name": "título de la sección (pendiente de escanear; con src vacío se usa la fuente)",
+    "src": "",
     "text": "illustrations"
   },
   "projects": [
@@ -20,15 +20,15 @@
         "images": [
           {
             "name": "tinta 1",
-            "src": "assets/placeholders/page1.svg"
+            "src": "assets/icons/new/trim_estrella1.png"
           },
           {
             "name": "tinta 2",
-            "src": "assets/placeholders/page2.svg"
+            "src": "assets/icons/new/trim_estrella2.png"
           },
           {
             "name": "tinta 3",
-            "src": "assets/placeholders/page3.svg"
+            "src": "assets/icons/new/trim_estrella3.png"
           }
         ]
       }
@@ -45,11 +45,11 @@
         "images": [
           {
             "name": "boceto 1",
-            "src": "assets/placeholders/page2.svg"
+            "src": "assets/icons/new/trim_estrella2.png"
           },
           {
             "name": "boceto 2",
-            "src": "assets/placeholders/page4.svg"
+            "src": "assets/icons/new/trim_estrella4.png"
           }
         ]
       }

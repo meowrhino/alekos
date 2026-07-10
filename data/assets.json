@@ -3,8 +3,8 @@
   "resources": [
     {
       "id": "welcomeTitle",
-      "name": "Título principal dibujado a mano (akkrazzo di cane)",
-      "src": "assets/ui/title-welcome.svg"
+      "name": "Título principal (pendiente de escanear; con src vacío se escribe con la fuente)",
+      "src": ""
     },
     {
       "id": "backButton",

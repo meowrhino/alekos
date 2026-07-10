@@ -32,10 +32,8 @@ data/
   animation.json
   music.json
 assets/             todas las imágenes, audio y vídeo
-  ui/               títulos dibujados (aún placeholders)
-  icons/new/        escaneos reales de Alekos; los trim_*.png son los mismos
-                    con el margen transparente recortado (son los que usa la web)
-  placeholders/     dibujos provisionales (sustituir por los escaneos)
+  icons/new/        escaneos de Alekos; los trim_*.png son los mismos con el
+                    margen transparente recortado (son los que usa la web)
 ```
 
 ## Guía de edición (para Alekos)
@@ -104,7 +102,11 @@ Si `src` está vacío se muestra solo el nombre, sin reproductor. Lo mismo con l
 
 ### Los escaneos
 
-Los iconos ya son escaneos reales (`assets/icons/new/`). Para añadir más a la bolsa: subir el PNG (fondo transparente, mejor recortado al dibujo) y añadir una línea en `iconPool` de `data/assets.json`. Los dibujos de `assets/placeholders/` y los títulos de `assets/ui/` siguen siendo provisionales; al sustituirlos, mantener los mismos nombres de archivo evita tocar los JSON. `assets/icons/new/fondo.png` (una textura de estrellitas) está subido pero aún sin uso — pendiente de decidir si será fondo de pantalla.
+Todos los dibujos de la web son ya escaneos de Alekos (`assets/icons/new/`). Para añadir más a la bolsa de iconos: subir el PNG (fondo transparente, mejor recortado al dibujo) y añadir una línea en `iconPool` de `data/assets.json`.
+
+Lo que aún no tiene dibujo escaneado se escribe con la fuente: el **título del welcome** y los **títulos de sección** llevan `"src": ""` en su JSON, y con el src vacío la web los pinta como texto en Darumadrop One. Cuando existan los títulos dibujados, basta con poner la ruta del archivo en ese `src`. Las portadas y páginas de los proyectos de ejemplo usan los escaneos de las estrellas como relleno hasta que lleguen las páginas reales.
+
+`assets/icons/new/fondo.png` (una textura de estrellitas) está subido pero aún sin uso — pendiente de decidir si será fondo de pantalla.
 
 ⚠️ **Cuidado con las comas en los JSON**: cada elemento de una lista se separa con coma, pero el último no lleva. Se puede comprobar que un JSON es válido pegándolo en [jsonlint.com](https://jsonlint.com).
 

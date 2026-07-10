@@ -2,8 +2,8 @@
   "_comentario": "Sección de animación. Cada proyecto puede llevar 'videos' (uno o varios; src puede ser un mp4 propio o un enlace de embed de YouTube/Vimeo — si src está vacío se ignora), 'text' y 'gallery'. Para YouTube usar el formato https://www.youtube.com/embed/ID",
   "id": "animation",
   "title": {
-    "name": "título de la sección dibujado a mano",
-    "src": "assets/ui/title-animation.svg",
+    "name": "título de la sección (pendiente de escanear; con src vacío se usa la fuente)",
+    "src": "",
     "text": "animation"
   },
   "projects": [
@@ -15,7 +15,7 @@
         {
           "name": "loop 1",
           "src": "",
-          "poster": "assets/placeholders/cover.svg"
+          "poster": "assets/icons/new/trim_planeta1.png"
         }
       ],
       "text": [
@@ -27,11 +27,11 @@
         "images": [
           {
             "name": "fotograma 1",
-            "src": "assets/placeholders/page1.svg"
+            "src": "assets/icons/new/trim_estrella1.png"
           },
           {
             "name": "fotograma 2",
-            "src": "assets/placeholders/page3.svg"
+            "src": "assets/icons/new/trim_estrella3.png"
           }
         ]
       }
